@@ -65,7 +65,7 @@ export function Header() {
                 alt="PawonLoka"
                 width={160}
                 height={64}
-                className="h-16 w-auto transition-all duration-300"
+                className="h-20 w-auto transition-all duration-300"
                 priority
               />
             </Link>

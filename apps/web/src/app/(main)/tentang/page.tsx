@@ -20,10 +20,10 @@ const values = [
 ]
 
 const milestones = [
-  { year: '2022', event: 'PawonLoka berdiri di Citra Indah City, Jonggol dengan menu sederhana namun penuh cinta.' },
-  { year: '2023', event: 'Meraih rating 4.8 di Google Maps dengan lebih dari 50 ulasan positif dari pelanggan setia.' },
-  { year: '2024', event: 'Menu berkembang menjadi lebih dari 50 pilihan. Komunitas pelanggan terus bertumbuh.' },
-  { year: '2025', event: 'Lebih dari 100 ulasan Google & pelanggan tetap. Fondasi untuk ekspansi masa depan.' },
+  { year: 'Jan 2025', event: 'Grand Opening PawonLoka di Citra Indah City, Jonggol — menyambut keluarga dan komunitas lokal dengan menu penuh cinta.' },
+  { year: 'Mar 2025', event: 'Respons luar biasa dari komunitas. Rating perdana 4.8 di Google Maps dengan puluhan ulasan bintang 5 dalam bulan-bulan pertama.' },
+  { year: 'Jun 2025', event: 'Menu berkembang pesat — kini lebih dari 40 pilihan dari Hidangan Utama, Nasi & Mie, hingga Gen-Z Special.' },
+  { year: '2026+', event: 'Komunitas pelanggan setia terus bertumbuh. Fondasi kuat untuk terus berinovasi dan membawa kehangatan PawonLoka lebih jauh.' },
 ]
 
 export default function TentangPage() {
@@ -170,7 +170,7 @@ export default function TentangPage() {
         <div className="container-narrow">
           <SectionHeader
             label="Perjalanan Kami"
-            title="Dari Dapur ke Komunitas"
+            title="Langkah Pertama Kami"
             className="mb-12"
           />
           <div className="relative">

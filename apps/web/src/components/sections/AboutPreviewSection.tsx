@@ -66,7 +66,8 @@ export function AboutPreviewSection() {
 
             {/* Floating stat card */}
             <div
-              className="absolute -top-4 -right-4 lg:right-0 xl:-right-8 bg-white rounded-2xl shadow-warm-lg p-5 w-44"
+              className="absolute -top-4 -right-4 lg:right-0 xl:-right-8 bg-white rounded-2xl p-5 w-44"
+              style={{ boxShadow: '0 0 32px rgba(0,0,0,0.14)' }}
               aria-label="Didirikan 2025, berlokasi di Citra Indah City"
             >
               <p className="font-display font-bold text-3xl text-warm-900 leading-none">2025</p>

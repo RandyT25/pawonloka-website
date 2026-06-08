@@ -62,11 +62,9 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
   return (
     <aside className="w-64 shrink-0 bg-sidebar flex flex-col h-full" aria-label="Navigasi admin">
       {/* Logo */}
-      <div className="flex items-center px-5 h-16 border-b border-sidebar-border">
-        <div>
-          <Image src="/logo-dark.png" alt="PawonLoka" width={130} height={52} className="h-9 w-auto" priority />
-          <p className="text-sidebar-muted text-[9px] tracking-wider uppercase mt-0.5">Admin Panel</p>
-        </div>
+      <div className="flex flex-col items-center justify-center h-20 border-b border-sidebar-border px-4">
+        <Image src="/logo-dark.png" alt="PawonLoka" width={150} height={60} className="h-12 w-auto" priority />
+        <p className="text-sidebar-muted text-[9px] tracking-wider uppercase mt-1">Admin Panel</p>
       </div>
 
       {/* Navigation */}

@@ -24,7 +24,7 @@ export function Footer() {
                 alt="PawonLoka"
                 width={160}
                 height={64}
-                className="h-16 w-auto opacity-90 group-hover:opacity-100 transition-opacity duration-200"
+                className="h-20 w-auto opacity-90 group-hover:opacity-100 transition-opacity duration-200"
               />
             </Link>
             <p className="text-sm leading-relaxed text-warm-400 mb-6">
