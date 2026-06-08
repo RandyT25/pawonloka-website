@@ -71,10 +71,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.png', type: 'image/png' },
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
     ],
-    apple: '/apple-touch-icon.png',
+    apple: '/favicon.png',
   },
   manifest: '/site.webmanifest',
 }

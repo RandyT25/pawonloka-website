@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { MapPin, Phone, Clock, Instagram, Facebook } from 'lucide-react'
 import { BUSINESS_HOURS, NAV_LINKS, RESTAURANT } from '@/lib/constants'
@@ -17,14 +18,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2.5 group mb-5">
-              <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30 group-hover:bg-primary/30 transition-colors">
-                <span className="font-display font-bold text-primary text-base">PL</span>
-              </div>
-              <div>
-                <p className="font-display font-bold text-white text-lg leading-tight">PawonLoka</p>
-                <p className="text-[10px] text-warm-500 leading-tight">Warung Hangat</p>
-              </div>
+            <Link href="/" className="inline-block mb-5 group">
+              <Image
+                src="/logo-dark.png"
+                alt="PawonLoka"
+                width={160}
+                height={64}
+                className="h-14 w-auto opacity-90 group-hover:opacity-100 transition-opacity duration-200"
+              />
             </Link>
             <p className="text-sm leading-relaxed text-warm-400 mb-6">
               Warung hangat tempat keluarga dan sahabat berkumpul menikmati cita rasa masakan Indonesia yang autentik dan menghangatkan hati.

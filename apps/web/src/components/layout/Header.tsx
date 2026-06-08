@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Phone } from 'lucide-react'
@@ -54,36 +55,17 @@ export function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-2.5 group"
+              className="flex items-center group"
               aria-label="PawonLoka - Kembali ke Beranda"
             >
-              <div className={cn(
-                'w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300',
-                isTransparent
-                  ? 'bg-white/15 backdrop-blur-sm border border-white/25'
-                  : 'bg-primary/10'
-              )}>
-                <span className={cn(
-                  'font-display font-bold text-base leading-none',
-                  isTransparent ? 'text-white' : 'text-primary'
-                )}>
-                  PL
-                </span>
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className={cn(
-                  'font-display font-bold text-lg leading-tight transition-colors duration-300',
-                  isTransparent ? 'text-white' : 'text-warm-900'
-                )}>
-                  PawonLoka
-                </span>
-                <span className={cn(
-                  'text-[10px] leading-tight tracking-wide transition-colors duration-300 hidden sm:block',
-                  isTransparent ? 'text-white/70' : 'text-warm-500'
-                )}>
-                  Warung Hangat Citra Indah City
-                </span>
-              </div>
+              <Image
+                src={isTransparent ? '/logo-dark.png' : '/logo.png'}
+                alt="PawonLoka"
+                width={160}
+                height={64}
+                className="h-12 w-auto transition-all duration-300"
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation */}
