@@ -1,12 +1,3 @@
 {
-  "projects": [
-    {
-      "name": "pawonloka-web",
-      "rootDirectory": "apps/web"
-    },
-    {
-      "name": "pawonloka-admin",
-      "rootDirectory": "apps/admin"
-    }
-  ]
+  "framework": "nextjs"
 }
