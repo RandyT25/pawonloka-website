@@ -71,12 +71,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.png', type: 'image/png' },
-      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/pawonloka-website/favicon.png', type: 'image/png' },
     ],
-    apple: '/favicon.png',
+    apple: '/pawonloka-website/favicon.png',
   },
-  manifest: '/site.webmanifest',
+  manifest: '/pawonloka-website/site.webmanifest',
 }
 
 export const viewport: Viewport = {

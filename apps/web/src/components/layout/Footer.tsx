@@ -20,7 +20,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-5 group">
               <Image
-                src="/logo-dark.png"
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/logo-dark.png`}
                 alt="PawonLoka"
                 width={160}
                 height={64}

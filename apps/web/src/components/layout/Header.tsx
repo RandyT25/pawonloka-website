@@ -59,7 +59,9 @@ export function Header() {
               aria-label="PawonLoka - Kembali ke Beranda"
             >
               <Image
-                src={isTransparent ? '/logo-dark.png' : '/logo.png'}
+                src={isTransparent
+                  ? `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/logo-dark.png`
+                  : `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/logo.png`}
                 alt="PawonLoka"
                 width={160}
                 height={64}

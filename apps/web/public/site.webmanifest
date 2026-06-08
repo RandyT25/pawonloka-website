@@ -1,0 +1,16 @@
+{
+  "name": "PawonLoka",
+  "short_name": "PawonLoka",
+  "description": "Warung Hangat untuk Keluarga dan Sahabat",
+  "start_url": "/pawonloka-website/",
+  "display": "standalone",
+  "background_color": "#FDFAF7",
+  "theme_color": "#C4602B",
+  "icons": [
+    {
+      "src": "/pawonloka-website/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
