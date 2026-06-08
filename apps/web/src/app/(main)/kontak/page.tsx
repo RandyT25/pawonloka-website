@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { Metadata } from 'next'
-import { MapPin, Phone, Clock, Instagram, Facebook, Send, CheckCircle } from 'lucide-react'
+import { MapPin, Phone, Clock, Instagram, Send, CheckCircle } from 'lucide-react'
 import { BUSINESS_HOURS, RESTAURANT, SITE_URL, WHATSAPP_ORDER_URL } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
@@ -118,22 +118,16 @@ export default function KontakPage() {
               <div className="bg-white rounded-2xl p-5 border border-warm-100">
                 <p className="font-semibold text-warm-800 mb-4">Ikuti Kami</p>
                 <div className="flex gap-3">
-                  {[
-                    { href: RESTAURANT.social.instagram, label: 'Instagram', icon: Instagram },
-                    { href: RESTAURANT.social.facebook, label: 'Facebook', icon: Facebook },
-                  ].map(({ href, label, icon: Icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 rounded-xl bg-warm-50 text-warm-600 hover:bg-primary/10 hover:text-primary text-sm font-medium transition-all cursor-pointer border border-warm-100"
-                      aria-label={`${label} PawonLoka`}
-                    >
-                      <Icon className="w-4 h-4" aria-hidden="true" />
-                      {label}
-                    </a>
-                  ))}
+                  <a
+                    href={RESTAURANT.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-warm-50 text-warm-600 hover:bg-primary/10 hover:text-primary text-sm font-medium transition-all cursor-pointer border border-warm-100"
+                    aria-label="Instagram PawonLoka"
+                  >
+                    <Instagram className="w-4 h-4" aria-hidden="true" />
+                    Instagram
+                  </a>
                   <a
                     href={RESTAURANT.social.tiktok}
                     target="_blank"

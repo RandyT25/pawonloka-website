@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Phone, Clock, Instagram, Facebook } from 'lucide-react'
+import { MapPin, Phone, Clock, Instagram } from 'lucide-react'
 import { BUSINESS_HOURS, NAV_LINKS, RESTAURANT } from '@/lib/constants'
 
 const LEGAL_LINKS = [
@@ -24,7 +24,7 @@ export function Footer() {
                 alt="PawonLoka"
                 width={160}
                 height={64}
-                className="h-14 w-auto opacity-90 group-hover:opacity-100 transition-opacity duration-200"
+                className="h-16 w-auto opacity-90 group-hover:opacity-100 transition-opacity duration-200"
               />
             </Link>
             <p className="text-sm leading-relaxed text-warm-400 mb-6">
@@ -40,15 +40,6 @@ export function Footer() {
                 aria-label="Instagram PawonLoka"
               >
                 <Instagram className="w-4 h-4" aria-hidden="true" />
-              </a>
-              <a
-                href={RESTAURANT.social.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-lg bg-warm-800 text-warm-400 hover:bg-primary/20 hover:text-primary transition-all duration-200 cursor-pointer"
-                aria-label="Facebook PawonLoka"
-              >
-                <Facebook className="w-4 h-4" aria-hidden="true" />
               </a>
               <a
                 href={RESTAURANT.social.tiktok}
@@ -149,7 +140,7 @@ export function Footer() {
       <div className="border-t border-warm-800">
         <div className="container-wide py-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-warm-600">
-            <p>© {currentYear} PawonLoka. Dibuat dengan ❤️ untuk keluarga Indonesia.</p>
+            <p>© {currentYear > 2025 ? `2025 – ${currentYear}` : '2025'} PawonLoka. Dibuat dengan ❤️ untuk keluarga Indonesia.</p>
             <div className="flex items-center gap-4">
               {LEGAL_LINKS.map(({ href, label }) => (
                 <Link key={href} href={href} className="hover:text-warm-400 transition-colors cursor-pointer">

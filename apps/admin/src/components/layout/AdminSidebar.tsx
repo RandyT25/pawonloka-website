@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
@@ -61,13 +62,10 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
   return (
     <aside className="w-64 shrink-0 bg-sidebar flex flex-col h-full" aria-label="Navigasi admin">
       {/* Logo */}
-      <div className="flex items-center gap-3 px-5 h-16 border-b border-sidebar-border">
-        <div className="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center border border-primary/30">
-          <span className="font-bold text-primary text-sm">PL</span>
-        </div>
+      <div className="flex items-center px-5 h-16 border-b border-sidebar-border">
         <div>
-          <p className="font-semibold text-white text-sm leading-tight">PawonLoka</p>
-          <p className="text-sidebar-muted text-[10px] leading-tight">Admin Panel</p>
+          <Image src="/logo-dark.png" alt="PawonLoka" width={130} height={52} className="h-9 w-auto" priority />
+          <p className="text-sidebar-muted text-[9px] tracking-wider uppercase mt-0.5">Admin Panel</p>
         </div>
       </div>
 

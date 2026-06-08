@@ -14,7 +14,7 @@ export function AdminHeader({ title, subtitle }: AdminHeaderProps) {
       </div>
       <div className="flex items-center gap-2">
         <a
-          href={process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'}
+          href={process.env.NEXT_PUBLIC_SITE_URL ?? 'https://randyt25.github.io/pawonloka-website'}
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs text-muted-foreground hover:text-foreground transition-colors border border-border rounded-lg px-3 py-1.5 cursor-pointer"

@@ -58,10 +58,26 @@ export default function PengaturanPage() {
   useEffect(() => {
     const loadSettings = async () => {
       const { data } = await supabase.from('settings').select('key, value')
-      if (data) {
-        const map: Record<string, string> = {}
+      const defaults: Record<string, string> = {
+        restaurant_name: 'PawonLoka',
+        restaurant_tagline: 'Warung Hangat untuk Keluarga dan Sahabat',
+        restaurant_description: 'Nikmati cita rasa masakan Indonesia yang hangat dan autentik di PawonLoka, Citra Indah City.',
+        restaurant_address: 'Citra Indah City Blok CH No.0025, Bukit Meranti, Kec. Jonggol, Kabupaten Bogor, Jawa Barat 16830',
+        phone: '0822-9923-8866',
+        whatsapp: '0822-9923-8866',
+        email: 'hello@pawonloka.com',
+        google_maps_url: 'https://maps.google.com/?q=Citra+Indah+City+Blok+CH+No.0025+Jonggol+Bogor',
+        instagram: 'https://instagram.com/pawonloka',
+        tiktok: 'https://tiktok.com/@pawonloka',
+        hero_title: 'Warung Hangat untuk Keluarga dan Sahabat',
+        hero_subtitle: 'Cita rasa masakan Indonesia yang autentik dan menghangatkan hati, di jantung Citra Indah City.',
+      }
+      if (data && data.length > 0) {
+        const map: Record<string, string> = { ...defaults }
         data.forEach(({ key, value }) => { map[key] = value ?? '' })
         setSettings(map)
+      } else {
+        setSettings(defaults)
       }
       setLoading(false)
     }

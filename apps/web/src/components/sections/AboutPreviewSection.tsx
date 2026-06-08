@@ -66,11 +66,11 @@ export function AboutPreviewSection() {
 
             {/* Floating stat card */}
             <div
-              className="absolute -bottom-4 -right-4 lg:right-0 xl:-right-8 bg-white rounded-2xl shadow-warm-lg p-5 w-48"
-              aria-label="Didirikan 2022, berlokasi di Citra Indah City"
+              className="absolute -top-4 -right-4 lg:right-0 xl:-right-8 bg-white rounded-2xl shadow-warm-lg p-5 w-44"
+              aria-label="Didirikan 2025, berlokasi di Citra Indah City"
             >
-              <p className="font-display font-bold text-3xl text-warm-900 leading-none">2022</p>
-              <p className="text-sm text-warm-500 mt-1">Didirikan di</p>
+              <p className="font-display font-bold text-3xl text-warm-900 leading-none">2025</p>
+              <p className="text-sm text-warm-500 mt-1">Berdiri sejak</p>
               <p className="text-sm font-semibold text-primary mt-0.5">Citra Indah City</p>
               <div className="mt-3 flex gap-0.5" aria-label="Rating 5 bintang" role="img">
                 {Array.from({ length: 5 }).map((_, i) => (

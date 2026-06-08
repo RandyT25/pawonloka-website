@@ -1,11 +1,21 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { MapPin, ChevronDown } from 'lucide-react'
-import { RESTAURANT, WHATSAPP_ORDER_URL } from '@/lib/constants'
+import { RESTAURANT, WHATSAPP_ORDER_URL, getIsOpenNow } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
 export function HeroSection() {
+  const [isOpen, setIsOpen] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    const check = () => setIsOpen(getIsOpenNow())
+    check()
+    const interval = setInterval(check, 60_000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <section
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
@@ -48,10 +58,22 @@ export function HeroSection() {
         <div className="max-w-3xl">
           {/* Eyebrow */}
           <div className="flex items-center gap-3 mb-7 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-2">
-              <span className="w-2 h-2 rounded-full bg-[#4ADE80] shadow-[0_0_6px_rgba(74,222,128,0.8)]" aria-hidden="true" />
-              <span className="text-white/85 text-sm font-medium">Buka Sekarang</span>
-            </div>
+            {isOpen !== null && (
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-2">
+                <span
+                  className={cn(
+                    'w-2 h-2 rounded-full',
+                    isOpen
+                      ? 'bg-[#4ADE80] shadow-[0_0_6px_rgba(74,222,128,0.8)]'
+                      : 'bg-red-400 shadow-[0_0_6px_rgba(248,113,113,0.8)]'
+                  )}
+                  aria-hidden="true"
+                />
+                <span className="text-white/85 text-sm font-medium">
+                  {isOpen ? 'Buka Sekarang' : 'Sedang Tutup'}
+                </span>
+              </div>
+            )}
             <div className="flex items-center gap-1.5 text-white/70 text-sm">
               <svg className="w-3.5 h-3.5 text-[#FBBF24] fill-current" viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />

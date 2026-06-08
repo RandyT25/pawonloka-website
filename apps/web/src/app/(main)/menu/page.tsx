@@ -1,28 +1,101 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Search, SlidersHorizontal } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { MenuCard } from '@/components/ui/MenuCard'
 import { MENU_CATEGORIES, WHATSAPP_ORDER_URL } from '@/lib/constants'
 import type { MenuItem } from '@/types'
 import { cn } from '@/lib/utils'
 
+const cat = (id: number, name: string, slug: string) => ({
+  id, name, slug, description: null, icon: null, display_order: id, is_active: true, created_at: '',
+})
+
+const item = (
+  id: number,
+  category_id: number,
+  name: string,
+  description: string,
+  price: number,
+  opts: Partial<{ is_featured: boolean; is_bestseller: boolean; is_recommended: boolean; badge_label: string }> = {}
+): MenuItem => ({
+  id,
+  category_id,
+  name,
+  description,
+  price,
+  image_url: null,
+  is_available: true,
+  is_featured: opts.is_featured ?? false,
+  is_bestseller: opts.is_bestseller ?? false,
+  is_recommended: opts.is_recommended ?? false,
+  badge_label: opts.badge_label ?? null,
+  display_order: id,
+  created_at: '',
+  updated_at: '',
+  category: cat(category_id, MENU_CATEGORIES.find(c => c.id === category_id)?.name ?? '', MENU_CATEGORIES.find(c => c.id === category_id)?.slug ?? ''),
+})
+
 const ALL_MENU_ITEMS: MenuItem[] = [
-  { id: 1, category_id: 1, name: 'Nasi Goreng Kampung', description: 'Nasi goreng dengan bumbu tradisional kampung, telur orak-arik, sayuran, dan kerupuk.', price: 25000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: false, badge_label: null, display_order: 1, created_at: '', updated_at: '', category: { id: 1, name: 'Nasi', slug: 'nasi', description: null, icon: null, display_order: 1, is_active: true, created_at: '' } },
-  { id: 2, category_id: 1, name: 'Nasi Goreng Spesial', description: 'Nasi goreng premium dengan ayam suwir, telur ceplok, dan sambal terasi pilihan.', price: 30000, image_url: null, is_available: true, is_featured: true, is_bestseller: true, is_recommended: false, badge_label: 'Best Seller', display_order: 2, created_at: '', updated_at: '', category: { id: 1, name: 'Nasi', slug: 'nasi', description: null, icon: null, display_order: 1, is_active: true, created_at: '' } },
-  { id: 3, category_id: 1, name: 'Nasi Uduk Komplit', description: 'Nasi uduk gurih dengan lauk komplit: ayam goreng, tempe orek, sambal goreng, dan kerupuk.', price: 28000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: true, badge_label: 'Recommended', display_order: 3, created_at: '', updated_at: '', category: { id: 1, name: 'Nasi', slug: 'nasi', description: null, icon: null, display_order: 1, is_active: true, created_at: '' } },
-  { id: 4, category_id: 1, name: 'Nasi Kuning', description: 'Nasi kuning aromatis dengan lauk pilihan, sambal, dan pelengkap tradisional.', price: 25000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: false, badge_label: null, display_order: 4, created_at: '', updated_at: '', category: { id: 1, name: 'Nasi', slug: 'nasi', description: null, icon: null, display_order: 1, is_active: true, created_at: '' } },
-  { id: 5, category_id: 2, name: 'Mie Goreng Spesial', description: 'Mie goreng kenyal dengan bumbu khas, sayuran segar, telur, dan topping ayam.', price: 25000, image_url: null, is_available: true, is_featured: true, is_bestseller: true, is_recommended: false, badge_label: 'Best Seller', display_order: 1, created_at: '', updated_at: '', category: { id: 2, name: 'Mie', slug: 'mie', description: null, icon: null, display_order: 2, is_active: true, created_at: '' } },
-  { id: 6, category_id: 2, name: 'Mie Kuah Ayam', description: 'Mie kuah kaldu ayam bening yang menyegarkan dengan ayam suwir dan daun bawang.', price: 22000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: false, badge_label: null, display_order: 2, created_at: '', updated_at: '', category: { id: 2, name: 'Mie', slug: 'mie', description: null, icon: null, display_order: 2, is_active: true, created_at: '' } },
-  { id: 7, category_id: 2, name: 'Bihun Goreng', description: 'Bihun goreng ringan dengan bumbu rempah, sayuran crispy, dan telur.', price: 20000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: false, badge_label: null, display_order: 3, created_at: '', updated_at: '', category: { id: 2, name: 'Mie', slug: 'mie', description: null, icon: null, display_order: 2, is_active: true, created_at: '' } },
-  { id: 8, category_id: 3, name: 'Es Teh Manis', description: 'Teh manis segar dengan gula pilihan, dingin menyegarkan.', price: 5000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: false, badge_label: null, display_order: 1, created_at: '', updated_at: '', category: { id: 3, name: 'Minuman', slug: 'minuman', description: null, icon: null, display_order: 3, is_active: true, created_at: '' } },
-  { id: 9, category_id: 3, name: 'Es Jeruk Peras', description: 'Jeruk segar diperas langsung, segar dan kaya vitamin C.', price: 8000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: false, badge_label: null, display_order: 2, created_at: '', updated_at: '', category: { id: 3, name: 'Minuman', slug: 'minuman', description: null, icon: null, display_order: 3, is_active: true, created_at: '' } },
-  { id: 10, category_id: 3, name: 'Es Kelapa Muda', description: 'Kelapa muda asli, segar langsung dari buahnya dengan air dan daging kelapa muda.', price: 12000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: true, badge_label: 'Segar', display_order: 3, created_at: '', updated_at: '', category: { id: 3, name: 'Minuman', slug: 'minuman', description: null, icon: null, display_order: 3, is_active: true, created_at: '' } },
-  { id: 11, category_id: 3, name: 'Jus Alpukat', description: 'Jus alpukat creamy dengan susu dan madu, kaya nutrisi dan mengenyangkan.', price: 15000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: false, badge_label: null, display_order: 4, created_at: '', updated_at: '', category: { id: 3, name: 'Minuman', slug: 'minuman', description: null, icon: null, display_order: 3, is_active: true, created_at: '' } },
-  { id: 12, category_id: 4, name: 'Pisang Goreng Keju', description: 'Pisang goreng renyah di luar lembut di dalam dengan topping keju susu lumer.', price: 15000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: false, badge_label: null, display_order: 1, created_at: '', updated_at: '', category: { id: 4, name: 'Cemilan', slug: 'cemilan', description: null, icon: null, display_order: 4, is_active: true, created_at: '' } },
-  { id: 13, category_id: 4, name: 'Tahu Tempe Goreng', description: 'Tahu dan tempe goreng crispy dengan sambal kecap pedas manis khas rumahan.', price: 10000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: false, badge_label: null, display_order: 2, created_at: '', updated_at: '', category: { id: 4, name: 'Cemilan', slug: 'cemilan', description: null, icon: null, display_order: 4, is_active: true, created_at: '' } },
-  { id: 14, category_id: 5, name: 'Ayam Bakar Pedas', description: 'Ayam bakar dengan bumbu pedas manis meresap sempurna, disajikan dengan nasi dan lalapan.', price: 38000, image_url: null, is_available: true, is_featured: true, is_bestseller: true, is_recommended: false, badge_label: 'Best Seller', display_order: 1, created_at: '', updated_at: '', category: { id: 5, name: 'Spesial', slug: 'spesial', description: null, icon: null, display_order: 5, is_active: true, created_at: '' } },
-  { id: 15, category_id: 5, name: 'Ikan Bakar', description: 'Ikan segar pilihan dibakar dengan bumbu kecombrang dan rempah nusantara.', price: 42000, image_url: null, is_available: true, is_featured: false, is_bestseller: false, is_recommended: true, badge_label: 'Istimewa', display_order: 2, created_at: '', updated_at: '', category: { id: 5, name: 'Spesial', slug: 'spesial', description: null, icon: null, display_order: 5, is_active: true, created_at: '' } },
+  // Hidangan Utama
+  item(1, 1, 'Ayam Bakar + Nasi', 'Ayam bakar bumbu rempah pilihan, disajikan dengan nasi putih hangat dan lalapan segar.', 28000, { is_featured: true, is_bestseller: true, badge_label: 'Best Seller' }),
+  item(2, 1, 'Ayam Bakar Taliwang + Nasi', 'Ayam bakar khas Lombok dengan bumbu pedas Taliwang yang kaya rempah, lengkap dengan nasi.', 33000, { is_recommended: true }),
+  item(3, 1, 'Sate Kambing + Nasi', 'Sate kambing pilihan empuk dengan bumbu kecap manis dan acar bawang, disajikan dengan nasi.', 38000, { is_featured: true }),
+  item(4, 1, 'Sate Ayam + Nasi', 'Sate ayam bumbu kacang gurih dengan lontong atau nasi, bumbu kacang khas nusantara.', 33000),
+  item(5, 1, 'Tongseng Ayam', 'Tongseng ayam kuah kaya rempah dengan kol, tomat, dan daun bawang — hangat dan lezat.', 33000, { is_recommended: true }),
+  item(6, 1, 'Tongseng Kambing', 'Tongseng kambing empuk dengan kuah santan rempah, kol, dan tomat segar.', 38000),
+  item(7, 1, 'Sop Iga Kambing', 'Sop iga kambing kuah bening segar dengan rempah pilihan, wortel, dan kentang.', 38000),
+  item(8, 1, 'Sop Tulang Daging Kambing', 'Sop tulang kambing dengan daging tebal, kuah gurih yang menghangatkan badan.', 38000),
+  item(9, 1, 'Ayam Kremes + Nasi', 'Ayam goreng dengan balutan kremes renyah gurih, disajikan dengan nasi dan sambal.', 30000, { is_bestseller: true, badge_label: 'Favorit' }),
+  item(10, 1, 'Rica Kambing + Nasi', 'Kambing rica-rica pedas dengan bumbu merah dan kemangi, disajikan dengan nasi putih.', 38000),
+
+  // Nasi & Mie
+  item(11, 2, 'Nasi Goreng Telor', 'Nasi goreng wangi dengan bumbu tradisional dan telur ceplok — simpel tapi memuaskan.', 20000),
+  item(12, 2, 'Nasi Goreng Ayam Kremes', 'Nasi goreng spesial dengan topping ayam kremes renyah dan sambal pilihan.', 38000, { is_featured: true, is_bestseller: true, badge_label: 'Best Seller' }),
+  item(13, 2, 'Nasi Goreng Kambing', 'Nasi goreng dengan potongan daging kambing empuk berbumbu, aroma rempah yang khas.', 38000, { is_recommended: true }),
+  item(14, 2, 'Mie Goreng Telor', 'Mie goreng kenyal dengan bumbu khas dan telur orak-arik, sajian sederhana yang lezat.', 20000),
+  item(15, 2, 'Mie Goreng Ayam', 'Mie goreng dengan potongan ayam suwir dan sayuran segar, bumbu meresap sempurna.', 28000),
+  item(16, 2, 'Mie Nyemek Ayam', 'Mie nyemek semi-kuah khas Jogja dengan ayam, bumbu pedas manis yang menggugah selera.', 28000, { is_recommended: true }),
+  item(17, 2, 'Bihun Goreng Ayam', 'Bihun goreng ringan dengan ayam suwir, telur, dan sayuran — cocok untuk semua usia.', 28000),
+
+  // Snack
+  item(18, 3, 'Kentang Goreng Homemade', 'Kentang goreng buatan sendiri, renyah di luar lembut di dalam — lebih nikmat dari fast food.', 15000, { is_recommended: true }),
+  item(19, 3, 'Mendoan', 'Tempe goreng tepung tipis khas Purwokerto, renyah dengan aroma daun kucai yang harum.', 15000),
+  item(20, 3, 'Siomay Ayam Mentai', 'Siomay ayam kukus atau goreng dengan saus mentai creamy yang kekinian.', 20000, { is_featured: true }),
+  item(21, 3, 'Cireng', 'Aci digoreng khas Sunda, kenyal di dalam renyah di luar — camilan favorit semua kalangan.', 10000),
+
+  // Extra
+  item(22, 4, 'Nasi', 'Nasi putih pulen tambahan untuk melengkapi hidangan utama.', 5000),
+  item(23, 4, 'Sambal Bawang', 'Sambal bawang pedas segar buatan sendiri — cocok untuk menambah cita rasa.', 3000),
+
+  // Gen-Z Special
+  item(24, 5, 'Mac & Cheese', 'Makaroni dengan saus keju creamy kental, disajikan panas — comfort food yang hits.', 30000, { is_featured: true }),
+  item(25, 5, 'Chicken Steak BBQ', 'Chicken steak dengan saus BBQ smoky, pilihan nasi putih atau kentang goreng.', 38000, { is_recommended: true, badge_label: 'Hits' }),
+
+  // Dessert
+  item(26, 6, 'Roti Bakar Coklat Kacang', 'Roti bakar garing dengan olesan coklat dan taburan kacang — manis dan mengenyangkan.', 16000),
+  item(27, 6, 'Roti Bakar Coklat Keju', 'Roti bakar dengan coklat lumer dan keju susu yang asin-manis sempurna.', 16000, { is_bestseller: true, badge_label: 'Favorit' }),
+  item(28, 6, 'Ronde', 'Minuman/dessert hangat dengan bola-bola tepung ketan isi kacang dalam kuah jahe manis.', 16000),
+  item(29, 6, 'Pisang Susu', 'Pisang bakar atau goreng dengan siraman susu kental manis — manis dan lembut.', 15000),
+  item(30, 6, 'Pisang Coklat Keju', 'Pisang bakar atau goreng dengan topping coklat dan keju — kombinasi klasik yang selalu enak.', 16000, { is_recommended: true }),
+  item(31, 6, 'Pisang Semut', 'Pisang bakar atau goreng dengan taburan gula yang karamelisasi, crunchy dan manis.', 15000),
+
+  // Minuman
+  item(32, 7, 'Air Hangat', 'Air putih hangat untuk menemani makan.', 2000),
+  item(33, 7, 'Air Mineral', 'Air mineral dingin menyegarkan.', 5000),
+  item(34, 7, 'Lychee Tea', 'Teh dengan cita rasa leci manis segar, disajikan dingin.', 20000, { is_recommended: true }),
+  item(35, 7, 'Lemon Tea', 'Teh lemon tawar atau manis, tersedia panas atau dingin.', 18000),
+  item(36, 7, 'Thai Tea', 'Thai tea creamy khas Thailand dengan susu kental, disajikan dingin.', 22000, { is_featured: true, is_bestseller: true, badge_label: 'Favorit' }),
+  item(37, 7, 'Jeruk Tawar / Manis', 'Jeruk peras segar, tersedia panas atau dingin sesuai selera.', 12000),
+  item(38, 7, 'Yuzu Lychee / Lemon', 'Minuman yuzu segar kombinasi leci atau lemon, disajikan dingin.', 25000, { is_recommended: true }),
+  item(39, 7, 'Americano', 'Kopi americano tawar atau manis, tersedia panas atau dingin.', 17000),
+  item(40, 7, 'Teh Tawar / Manis', 'Teh klasik tawar atau manis, tersedia panas atau dingin.', 8000),
+  item(41, 7, 'Coffee Latte', 'Kopi latte tawar atau manis dengan susu, tersedia panas atau dingin. Tambah +5K Salted Caramel / +7K Aren.', 20000, { is_featured: true }),
+  item(42, 7, 'Matcha / Redvelvet Latte', 'Latte matcha atau redvelvet dengan susu creamy, disajikan dingin.', 25000, { is_recommended: true }),
+  item(43, 7, 'Wedang Jahe Susu', 'Wedang jahe hangat dengan susu — menghangatkan tubuh dan menenangkan.', 15000),
+  item(44, 7, 'Wedang Jahe', 'Wedang jahe tradisional hangat dengan rempah pilihan.', 12000),
+  item(45, 7, 'Wedang Uwuh', 'Minuman rempah tradisional Jawa dengan kayu secang, jahe, dan cengkeh.', 15000, { is_recommended: true }),
+  item(46, 7, 'Milo Dinosaur', 'Milo susu dingin dengan taburan bubuk Milo melimpah di atasnya.', 25000, { badge_label: 'Gen-Z' }),
 ]
 
 export default function MenuPage() {
@@ -55,7 +128,7 @@ export default function MenuPage() {
             Semua Ada di Sini
           </h1>
           <p className="text-warm-400 text-lg max-w-md text-pretty">
-            Dari nasi hingga cemilan, dari minuman segar hingga hidangan spesial — semua untuk Anda.
+            Dari hidangan utama hingga dessert, dari cemilan hingga minuman — semua untuk Anda.
           </p>
         </div>
       </div>
@@ -91,7 +164,7 @@ export default function MenuPage() {
               >
                 Semua
               </button>
-              {MENU_CATEGORIES.map(({ id, name, icon }) => (
+              {MENU_CATEGORIES.map(({ id, name }) => (
                 <button
                   key={id}
                   onClick={() => setActiveCategory(activeCategory === id ? null : id)}
@@ -103,7 +176,6 @@ export default function MenuPage() {
                   )}
                   aria-pressed={activeCategory === id}
                 >
-                  <span aria-hidden="true">{icon}</span>
                   {name}
                 </button>
               ))}
@@ -128,7 +200,6 @@ export default function MenuPage() {
             </>
           ) : (
             <div className="text-center py-20">
-              <div className="text-5xl mb-4" aria-hidden="true">🍽️</div>
               <p className="font-display font-bold text-warm-800 text-xl mb-2">Menu tidak ditemukan</p>
               <p className="text-warm-500 text-sm">
                 Coba kata kunci lain atau pilih kategori yang berbeda.
