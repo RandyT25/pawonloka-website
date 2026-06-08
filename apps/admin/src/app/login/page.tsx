@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
@@ -86,13 +87,9 @@ export default function LoginPage() {
         {/* Top: Logo */}
         <div className="relative z-10 p-10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/30">
-              <span className="font-display font-bold text-white text-sm tracking-wider">PL</span>
-            </div>
-            <div>
-              <p className="font-display font-bold text-white text-lg leading-none">PawonLoka</p>
-              <p className="text-white/40 text-xs tracking-widest uppercase mt-0.5">Admin Panel</p>
-            </div>
+            <Image src="/logo-dark.png" alt="PawonLoka" width={120} height={48}
+              className="h-12 w-auto" priority />
+            <span className="text-white/30 text-xs tracking-widest uppercase border-l border-white/20 pl-3">Admin Panel</span>
           </div>
         </div>
 
@@ -138,11 +135,9 @@ export default function LoginPage() {
       <div className="flex-1 flex flex-col items-center justify-center bg-[#FDFAF7] px-6 py-12 sm:px-12">
 
         {/* Mobile logo */}
-        <div className="flex items-center gap-2.5 mb-10 lg:hidden">
-          <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
-            <span className="font-display font-bold text-white text-xs">PL</span>
-          </div>
-          <span className="font-display font-bold text-[#1A0F0A] text-lg">PawonLoka Admin</span>
+        <div className="flex flex-col items-center gap-1 mb-10 lg:hidden">
+          <Image src="/logo.png" alt="PawonLoka" width={140} height={56} className="h-14 w-auto" priority />
+          <span className="text-[#B09D8E] text-xs tracking-widest uppercase">Admin Panel</span>
         </div>
 
         <div className="w-full max-w-[400px]">
