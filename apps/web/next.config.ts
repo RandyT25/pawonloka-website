@@ -1,7 +1,11 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  output: 'export',
+  basePath: '/pawonloka-website',
+  trailingSlash: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -17,10 +21,9 @@ const nextConfig: NextConfig = {
         hostname: 'placehold.co',
       },
     ],
-    formats: ['image/avif', 'image/webp'],
   },
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: ['lucide-react'],
   },
 }
 
