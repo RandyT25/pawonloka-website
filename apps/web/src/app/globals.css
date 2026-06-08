@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 36 50% 99%;
+    --foreground: 30 43% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 30 43% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 43% 10%;
+    --primary: 23 63% 47%;
+    --primary-foreground: 36 50% 97%;
+    --secondary: 36 45% 90%;
+    --secondary-foreground: 30 43% 25%;
+    --muted: 36 30% 94%;
+    --muted-foreground: 30 20% 48%;
+    --accent: 38 65% 56%;
+    --accent-foreground: 30 43% 10%;
+    --destructive: 4 67% 47%;
+    --destructive-foreground: 36 50% 97%;
+    --border: 36 30% 88%;
+    --input: 36 30% 88%;
+    --ring: 23 63% 47%;
+    --radius: 0.625rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-primary-900;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+
+  img {
+    @apply max-w-full;
+  }
+}
+
+@layer components {
+  .container-narrow {
+    @apply container max-w-4xl;
+  }
+
+  .container-wide {
+    @apply container max-w-7xl;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .section-padding-sm {
+    @apply py-10 md:py-16 lg:py-20;
+  }
+
+  /* Typography */
+  .display-heading {
+    @apply font-display font-bold leading-tight tracking-tight text-warm-900;
+  }
+
+  .section-label {
+    @apply text-sm font-semibold tracking-[0.15em] uppercase text-primary;
+  }
+
+  /* Card styles */
+  .card-hover {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-warm-lg;
+  }
+
+  /* Grain texture overlay */
+  .grain-overlay {
+    position: relative;
+  }
+
+  .grain-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Warm divider */
+  .warm-divider {
+    @apply w-12 h-1 bg-primary rounded-full;
+  }
+
+  /* WhatsApp green */
+  .whatsapp-btn {
+    background-color: #25D366;
+    @apply text-white hover:brightness-105 active:brightness-95;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply animate-pulse bg-warm-200 rounded-lg;
+  }
+
+  /* Price display */
+  .price-tag {
+    @apply text-primary font-display font-semibold;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .writing-vertical {
+    writing-mode: vertical-rl;
+  }
+
+  .bg-grid-pattern {
+    background-image: linear-gradient(rgba(196, 96, 43, 0.04) 1px, transparent 1px),
+      linear-gradient(to right, rgba(196, 96, 43, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-dot-pattern {
+    background-image: radial-gradient(rgba(196, 96, 43, 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}

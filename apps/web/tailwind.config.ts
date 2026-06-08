@@ -1,0 +1,163 @@
+import type { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
+
+const config: Config = {
+  darkMode: ['class'],
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1.25rem',
+        sm: '1.5rem',
+        lg: '2rem',
+        xl: '2.5rem',
+        '2xl': '3rem',
+      },
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1400px',
+      },
+    },
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#C4602B',
+          50: '#FDF3EE',
+          100: '#FAE3D5',
+          200: '#F5C4A8',
+          300: '#EE9E74',
+          400: '#E8855A',
+          500: '#C4602B',
+          600: '#A04A20',
+          700: '#7E3A18',
+          800: '#5C2B11',
+          900: '#3A1B0A',
+          foreground: '#FDFAF7',
+        },
+        secondary: {
+          DEFAULT: '#8B6914',
+          50: '#FBF6E7',
+          100: '#F5E9C5',
+          200: '#E9CC85',
+          300: '#D9AE4A',
+          400: '#C49530',
+          500: '#8B6914',
+          600: '#6A4F0E',
+          700: '#4E3B0A',
+          800: '#342706',
+          900: '#1A1303',
+          foreground: '#FDFAF7',
+        },
+        accent: {
+          DEFAULT: '#D4A84B',
+          light: '#E8C470',
+          dark: '#B08830',
+          foreground: '#1A1209',
+        },
+        warm: {
+          white: '#FDFAF7',
+          50: '#FDFAF7',
+          100: '#F5EFE6',
+          200: '#EBE0D0',
+          300: '#DDD0BC',
+          400: '#C9B89E',
+          500: '#9B8874',
+          600: '#7D6E5C',
+          700: '#5C4B35',
+          800: '#3A2E1E',
+          900: '#1A1209',
+        },
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+      },
+      fontFamily: {
+        display: ['var(--font-fraunces)', 'Playfair Display', 'Georgia', 'serif'],
+        body: ['var(--font-plus-jakarta)', ...fontFamily.sans],
+        sans: ['var(--font-plus-jakarta)', ...fontFamily.sans],
+      },
+      fontSize: {
+        'display-2xl': ['clamp(3rem, 7vw, 5.5rem)', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
+        'display-xl': ['clamp(2.5rem, 5.5vw, 4.5rem)', { lineHeight: '1.08', letterSpacing: '-0.025em' }],
+        'display-lg': ['clamp(2rem, 4vw, 3.5rem)', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+        'display-md': ['clamp(1.75rem, 3vw, 2.5rem)', { lineHeight: '1.15', letterSpacing: '-0.015em' }],
+        'display-sm': ['clamp(1.5rem, 2.5vw, 2rem)', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+        '2xl': '1rem',
+        '3xl': '1.5rem',
+        '4xl': '2rem',
+      },
+      boxShadow: {
+        'warm-sm': '0 1px 3px 0 rgba(26, 18, 9, 0.08), 0 1px 2px -1px rgba(26, 18, 9, 0.06)',
+        warm: '0 4px 6px -1px rgba(26, 18, 9, 0.08), 0 2px 4px -2px rgba(26, 18, 9, 0.06)',
+        'warm-md': '0 10px 15px -3px rgba(26, 18, 9, 0.08), 0 4px 6px -4px rgba(26, 18, 9, 0.05)',
+        'warm-lg': '0 20px 25px -5px rgba(26, 18, 9, 0.1), 0 8px 10px -6px rgba(26, 18, 9, 0.06)',
+        'warm-xl': '0 25px 50px -12px rgba(26, 18, 9, 0.18)',
+        'primary-glow': '0 0 0 3px rgba(196, 96, 43, 0.25)',
+      },
+      backgroundImage: {
+        'warm-gradient': 'linear-gradient(135deg, #1A1209 0%, #5C4B35 100%)',
+        'hero-overlay': 'linear-gradient(135deg, rgba(26,18,9,0.85) 0%, rgba(92,75,53,0.7) 50%, rgba(196,96,43,0.3) 100%)',
+        'card-gradient': 'linear-gradient(180deg, transparent 40%, rgba(26,18,9,0.85) 100%)',
+        'section-gradient': 'linear-gradient(180deg, #FDFAF7 0%, #F5EFE6 100%)',
+      },
+      keyframes: {
+        'accordion-down': { from: { height: '0' }, to: { height: 'var(--radix-accordion-content-height)' } },
+        'accordion-up': { from: { height: 'var(--radix-accordion-content-height)' }, to: { height: '0' } },
+        'fade-in': { from: { opacity: '0', transform: 'translateY(16px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+        'fade-in-left': { from: { opacity: '0', transform: 'translateX(-16px)' }, to: { opacity: '1', transform: 'translateX(0)' } },
+        'scale-in': { from: { opacity: '0', transform: 'scale(0.95)' }, to: { opacity: '1', transform: 'scale(1)' } },
+        shimmer: { from: { backgroundPosition: '200% 0' }, to: { backgroundPosition: '-200% 0' } },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'fade-in': 'fade-in 0.5s ease-out forwards',
+        'fade-in-left': 'fade-in-left 0.5s ease-out forwards',
+        'scale-in': 'scale-in 0.3s ease-out forwards',
+        shimmer: 'shimmer 2s linear infinite',
+        float: 'float 3s ease-in-out infinite',
+      },
+      transitionTimingFunction: {
+        spring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+      },
+    },
+  },
+  plugins: [require('tailwindcss-animate')],
+}
+
+export default config
