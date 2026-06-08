@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Plus, Pencil, Trash2, Search, ToggleLeft, ToggleRight, ImagePlus } from 'lucide-react'
 import { AdminHeader } from '@/components/layout/AdminHeader'
 import { createClient } from '@/lib/supabase/client'
@@ -19,7 +19,7 @@ export default function MenuManagementPage() {
   const [form, setForm] = useState({ name: '', description: '', price: '', category_id: '', is_available: true, is_bestseller: false, is_recommended: false, badge_label: '' })
   const [saving, setSaving] = useState(false)
 
-  const supabase = createClient()
+  const supabase = useRef(createClient()).current
 
   const loadData = async () => {
     setLoading(true)

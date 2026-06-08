@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Trash2, Upload, ImagePlus, Loader2 } from 'lucide-react'
 import { AdminHeader } from '@/components/layout/AdminHeader'
@@ -12,7 +12,7 @@ export default function GaleriPage() {
   const [images, setImages] = useState<GalleryImage[]>([])
   const [loading, setLoading] = useState(true)
   const [uploading, setUploading] = useState(false)
-  const supabase = createClient()
+  const supabase = useRef(createClient()).current
 
   const loadImages = async () => {
     const { data } = await supabase

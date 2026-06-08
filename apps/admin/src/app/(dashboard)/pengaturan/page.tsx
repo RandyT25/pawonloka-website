@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Save, CheckCircle } from 'lucide-react'
 import { AdminHeader } from '@/components/layout/AdminHeader'
 import { createClient } from '@/lib/supabase/client'
@@ -53,7 +53,7 @@ export default function PengaturanPage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
-  const supabase = createClient()
+  const supabase = useRef(createClient()).current
 
   useEffect(() => {
     const loadSettings = async () => {
