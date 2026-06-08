@@ -1,7 +1,5 @@
 'use client'
 
-export const dynamic = 'force-dynamic'
-
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react'
@@ -16,13 +14,13 @@ export default function LoginPage() {
   const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
-  const supabase = createClient()
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
 
+    const supabase = createClient()
     const { error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error) {
@@ -41,6 +39,7 @@ export default function LoginPage() {
     setGoogleLoading(true)
     setError(null)
 
+    const supabase = createClient()
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
