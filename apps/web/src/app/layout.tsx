@@ -71,9 +71,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/pawonloka-website/favicon.png', type: 'image/png' },
+      { url: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/favicon.svg`, type: 'image/svg+xml' },
+      { url: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/favicon.png`, type: 'image/png', sizes: '32x32' },
     ],
-    apple: '/pawonloka-website/favicon.png',
+    apple: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/favicon.png`,
   },
   manifest: '/pawonloka-website/site.webmanifest',
 }

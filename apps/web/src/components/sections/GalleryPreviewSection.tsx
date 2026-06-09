@@ -1,18 +1,61 @@
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
+import { createClient } from '@/lib/supabase/client'
+import type { GalleryImage } from '@/types'
 
-const GALLERY_ITEMS = [
-  { id: 1, label: 'Ayam Bakar PawonLoka', category: 'Hidangan Utama', span: 'col-span-2 row-span-2', src: 'https://placehold.co/800x600/7B3A22/FDFAF7' },
-  { id: 2, label: 'Suasana Warung',       category: 'Restoran',       span: 'col-span-1 row-span-1', src: 'https://placehold.co/400x300/6B5C44/FDFAF7' },
-  { id: 3, label: 'Thai Tea & Lychee Tea', category: 'Minuman',       span: 'col-span-1 row-span-1', src: 'https://placehold.co/400x300/3A7D59/FDFAF7' },
-  { id: 4, label: 'Nasi Goreng Kambing',  category: 'Nasi & Mie',     span: 'col-span-1 row-span-1', src: 'https://placehold.co/400x300/C4602B/FDFAF7' },
-  { id: 5, label: 'Momen Bersama',        category: 'Pelanggan',      span: 'col-span-1 row-span-1', src: 'https://placehold.co/400x300/8B6914/FDFAF7' },
-  { id: 6, label: 'Roti Bakar Coklat Keju', category: 'Dessert',      span: 'col-span-1 row-span-1', src: 'https://placehold.co/400x300/C0856C/1A1209' },
+type DisplayItem = {
+  id: number
+  label: string
+  category: string
+  span: string
+  src: string
+}
+
+const FALLBACK: DisplayItem[] = [
+  { id: 1, label: 'Ayam Bakar PawonLoka',   category: 'Hidangan Utama', span: 'col-span-2 row-span-2', src: 'https://source.unsplash.com/800x600/?grilled+chicken+satay&sig=1' },
+  { id: 2, label: 'Suasana Warung',          category: 'Restoran',       span: 'col-span-1 row-span-1', src: 'https://source.unsplash.com/400x300/?restaurant+cozy+warm&sig=2' },
+  { id: 3, label: 'Thai Tea & Lychee Tea',   category: 'Minuman',        span: 'col-span-1 row-span-1', src: 'https://source.unsplash.com/400x300/?thai+tea+milk+tea&sig=3' },
+  { id: 4, label: 'Nasi Goreng Kambing',     category: 'Nasi & Mie',     span: 'col-span-1 row-span-1', src: 'https://source.unsplash.com/400x300/?fried+rice+asian&sig=4' },
+  { id: 5, label: 'Momen Bersama',           category: 'Pelanggan',      span: 'col-span-1 row-span-1', src: 'https://source.unsplash.com/400x300/?family+restaurant+dinner&sig=5' },
+  { id: 6, label: 'Roti Bakar Coklat Keju', category: 'Dessert',         span: 'col-span-1 row-span-1', src: 'https://source.unsplash.com/400x300/?toast+chocolate+dessert&sig=6' },
 ]
 
+const SPANS = ['col-span-2 row-span-2', 'col-span-1 row-span-1', 'col-span-1 row-span-1', 'col-span-1 row-span-1', 'col-span-1 row-span-1', 'col-span-1 row-span-1']
+
+function toDisplay(img: GalleryImage, index: number): DisplayItem {
+  return {
+    id: img.id,
+    src: img.url,
+    label: img.alt_text ?? `Foto ${index + 1}`,
+    category: img.category?.name ?? 'Galeri',
+    span: SPANS[index] ?? 'col-span-1 row-span-1',
+  }
+}
+
 export function GalleryPreviewSection() {
+  const [items, setItems] = useState<DisplayItem[]>(FALLBACK)
+  const supabase = useRef(createClient()).current
+
+  useEffect(() => {
+    const load = async () => {
+      const { data } = await supabase
+        .from('gallery_images')
+        .select('*, category:gallery_categories(*)')
+        .eq('is_featured', true)
+        .order('display_order')
+        .limit(6)
+      if (data && data.length > 0) {
+        setItems((data as GalleryImage[]).map(toDisplay))
+      }
+    }
+    load()
+  }, [supabase])
+
   return (
     <section className="section-padding bg-white" aria-labelledby="gallery-heading">
       <div className="container-wide">
@@ -32,13 +75,12 @@ export function GalleryPreviewSection() {
           </Link>
         </div>
 
-        {/* Gallery Grid */}
         <div
           className="grid grid-cols-3 grid-rows-3 gap-3 h-[500px] md:h-[600px]"
           role="list"
           aria-label="Preview galeri foto PawonLoka"
         >
-          {GALLERY_ITEMS.map(({ id, label, category, span, src }) => (
+          {items.map(({ id, label, category, span, src }) => (
             <div
               key={id}
               className={`${span} relative rounded-2xl overflow-hidden group cursor-pointer`}
@@ -53,17 +95,14 @@ export function GalleryPreviewSection() {
                 unoptimized
               />
 
-              {/* Hover overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
 
-              {/* Category badge */}
               <div className="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-1 group-hover:translate-y-0">
                 <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full border border-white/20">
                   {category}
                 </span>
               </div>
 
-              {/* Label */}
               <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-1 group-hover:translate-y-0">
                 <p className="text-white font-semibold text-sm">{label}</p>
               </div>
@@ -73,7 +112,6 @@ export function GalleryPreviewSection() {
           ))}
         </div>
 
-        {/* Mobile CTA */}
         <div className="text-center mt-8 md:hidden">
           <Link
             href="/galeri"

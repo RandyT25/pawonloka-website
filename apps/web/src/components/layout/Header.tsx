@@ -58,16 +58,25 @@ export function Header() {
               className="flex items-center group"
               aria-label="PawonLoka - Kembali ke Beranda"
             >
-              <Image
-                src={isTransparent
-                  ? `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/logo-dark.png`
-                  : `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/logo.png`}
-                alt="PawonLoka"
-                width={160}
-                height={64}
-                className="h-20 w-auto transition-all duration-300"
-                priority
-              />
+                <div className="relative h-20">
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/logo-dark.png`}
+                  alt="PawonLoka"
+                  width={160}
+                  height={64}
+                  className={cn('h-20 w-auto transition-opacity duration-500', isTransparent ? 'opacity-100' : 'opacity-0')}
+                  priority
+                />
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/logo.png`}
+                  alt=""
+                  aria-hidden
+                  width={160}
+                  height={64}
+                  className={cn('absolute top-0 left-0 h-20 w-auto transition-opacity duration-500', isTransparent ? 'opacity-0' : 'opacity-100')}
+                  priority
+                />
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
