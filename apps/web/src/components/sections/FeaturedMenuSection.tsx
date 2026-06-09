@@ -27,8 +27,8 @@ export function FeaturedMenuSection() {
         .from('menu_items')
         .select('*, category:menu_categories(*)')
         .eq('is_available', true)
-        .or('is_featured.eq.true,is_bestseller.eq.true')
-        .order('display_order')
+        .eq('is_featured', true)
+        .order('updated_at', { ascending: false })
         .limit(6)
       if (data && data.length > 0) setItems(data as MenuItem[])
     }
