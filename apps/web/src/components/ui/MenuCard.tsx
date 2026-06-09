@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 import { cn, formatPrice } from '@/lib/utils'
 import type { MenuItem } from '@/types'
@@ -13,7 +16,38 @@ const BADGE_STYLES = {
   favorite: 'bg-secondary text-white',
 } as const
 
+// Working food photos from Unsplash CDN (direct, not source.unsplash.com)
+const PHOTO_POOL = [
+  'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1562967914-608f82629710?w=600&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=400&fit=crop',
+]
+
+function getPhotoFallback(id: number) {
+  return PHOTO_POOL[id % PHOTO_POOL.length]
+}
+
+function isValidImageUrl(url: string | null): boolean {
+  if (!url) return false
+  // source.unsplash.com is deprecated — treat as no image
+  if (url.includes('source.unsplash.com')) return false
+  return true
+}
+
 export function MenuCard({ item, className }: MenuCardProps) {
+  const initialSrc = isValidImageUrl(item.image_url) ? item.image_url! : getPhotoFallback(item.id)
+  const [imgSrc, setImgSrc] = useState(initialSrc)
+  const [imgError, setImgError] = useState(false)
+
   const badge = item.is_bestseller
     ? { label: item.badge_label ?? 'Best Seller', style: BADGE_STYLES.bestseller }
     : item.is_recommended
@@ -21,6 +55,13 @@ export function MenuCard({ item, className }: MenuCardProps) {
     : item.is_featured
     ? { label: item.badge_label ?? 'Pilihan Kami', style: BADGE_STYLES.favorite }
     : null
+
+  const handleImageError = () => {
+    if (!imgError) {
+      setImgError(true)
+      setImgSrc(getPhotoFallback(item.id))
+    }
+  }
 
   return (
     <article
@@ -32,31 +73,19 @@ export function MenuCard({ item, className }: MenuCardProps) {
     >
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-warm-100">
-        {item.image_url ? (
-          <>
-            <Image
-              src={item.image_url}
-              alt={item.name}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              loading="lazy"
-              unoptimized
-            />
-            {/* Subtle permanent gradient at bottom */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" aria-hidden="true" />
-            {/* Stronger hover gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
-          </>
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-warm-200 to-warm-300 flex items-center justify-center" aria-hidden="true">
-            <svg className="w-14 h-14 text-warm-400/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-            </svg>
-          </div>
-        )}
+        <Image
+          src={imgSrc}
+          alt={item.name}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          loading="lazy"
+          unoptimized
+          onError={handleImageError}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
 
-        {/* Badge */}
         {badge && (
           <div className="absolute top-3 left-3 z-10">
             <span className={cn('px-2.5 py-1 rounded-lg text-xs font-bold shadow-sm', badge.style)}>
@@ -65,7 +94,6 @@ export function MenuCard({ item, className }: MenuCardProps) {
           </div>
         )}
 
-        {/* Category pill - shows on hover */}
         {item.category && (
           <div className="absolute bottom-3 right-3 z-10 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
             <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full border border-white/20">
@@ -74,7 +102,6 @@ export function MenuCard({ item, className }: MenuCardProps) {
           </div>
         )}
 
-        {/* Unavailable overlay */}
         {!item.is_available && (
           <div className="absolute inset-0 bg-warm-900/50 flex items-center justify-center z-10">
             <span className="bg-warm-900/80 text-white text-xs font-semibold px-3 py-1.5 rounded-lg backdrop-blur-sm tracking-wide uppercase">

@@ -15,18 +15,18 @@ type DisplayImage = {
 }
 
 const FALLBACK: DisplayImage[] = [
-  { id: 1,  src: 'https://source.unsplash.com/800x600/?grilled+chicken+food&sig=1',         label: 'Ayam Bakar PawonLoka',  caption: 'Ayam bakar bumbu rempah pilihan',         tall: true  },
-  { id: 2,  src: 'https://source.unsplash.com/800x600/?restaurant+warm+dining&sig=2',       label: 'Suasana Warung Malam',   caption: 'Atmosfer hangat di malam hari',           tall: false },
-  { id: 3,  src: 'https://source.unsplash.com/800x600/?fried+rice+asian+food&sig=3',        label: 'Nasi Goreng Kambing',    caption: 'Nasi goreng dengan daging kambing empuk', tall: false },
-  { id: 4,  src: 'https://source.unsplash.com/600x800/?thai+tea+milk+tea+drink&sig=4',      label: 'Thai Tea',               caption: 'Minuman favorit setiap hari',             tall: true  },
-  { id: 5,  src: 'https://source.unsplash.com/800x600/?family+restaurant+dinner&sig=5',     label: 'Gathering Keluarga',     caption: 'Momen bersama yang tak terlupakan',       tall: false },
-  { id: 6,  src: 'https://source.unsplash.com/800x600/?satay+skewer+grilled+meat&sig=6',   label: 'Sate Kambing + Nasi',    caption: 'Sate kambing empuk dengan bumbu kecap',   tall: false },
-  { id: 7,  src: 'https://source.unsplash.com/800x600/?restaurant+outdoor+cafe&sig=7',      label: 'Area Makan PawonLoka',   caption: 'Tempat duduk yang nyaman dan asri',       tall: false },
-  { id: 8,  src: 'https://source.unsplash.com/800x600/?birthday+celebration+party&sig=8',  label: 'Ulang Tahun Spesial',    caption: 'Kami siap menyambut momen spesial Anda', tall: true  },
-  { id: 9,  src: 'https://source.unsplash.com/800x600/?chicken+steak+bbq+plate&sig=9',     label: 'Chicken Steak BBQ',      caption: 'Menu Gen-Z Special yang hits',            tall: false },
-  { id: 10, src: 'https://source.unsplash.com/800x600/?friends+community+dining&sig=10',   label: 'Komunitas Citra Indah',  caption: 'Bersama membangun komunitas yang hangat', tall: false },
-  { id: 11, src: 'https://source.unsplash.com/800x600/?toast+chocolate+dessert&sig=11',    label: 'Roti Bakar Coklat Keju', caption: 'Dessert favorit semua usia',              tall: false },
-  { id: 12, src: 'https://source.unsplash.com/800x600/?restaurant+kitchen+cooking&sig=12', label: 'Dapur PawonLoka',        caption: 'Di sinilah keajaiban masakan tercipta',   tall: true  },
+  { id: 1,  src: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800&h=600&fit=crop', label: 'Ayam Bakar PawonLoka',  caption: 'Ayam bakar bumbu rempah pilihan',         tall: true  },
+  { id: 2,  src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop', label: 'Suasana Warung Malam',   caption: 'Atmosfer hangat di malam hari',           tall: false },
+  { id: 3,  src: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&h=600&fit=crop', label: 'Nasi Goreng Kambing',    caption: 'Nasi goreng dengan daging kambing empuk', tall: false },
+  { id: 4,  src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=800&fit=crop',    label: 'Thai Tea',               caption: 'Minuman favorit setiap hari',             tall: true  },
+  { id: 5,  src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop', label: 'Gathering Keluarga',     caption: 'Momen bersama yang tak terlupakan',       tall: false },
+  { id: 6,  src: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&h=600&fit=crop',    label: 'Sate Kambing + Nasi',    caption: 'Sate kambing empuk dengan bumbu kecap',   tall: false },
+  { id: 7,  src: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop',    label: 'Area Makan PawonLoka',   caption: 'Tempat duduk yang nyaman dan asri',       tall: false },
+  { id: 8,  src: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop', label: 'Ulang Tahun Spesial',    caption: 'Kami siap menyambut momen spesial Anda', tall: true  },
+  { id: 9,  src: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&h=600&fit=crop',    label: 'Chicken Steak BBQ',      caption: 'Menu Gen-Z Special yang hits',            tall: false },
+  { id: 10, src: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop', label: 'Komunitas Citra Indah',  caption: 'Bersama membangun komunitas yang hangat', tall: false },
+  { id: 11, src: 'https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=800&h=600&fit=crop', label: 'Roti Bakar Coklat Keju', caption: 'Dessert favorit semua usia',              tall: false },
+  { id: 12, src: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&h=600&fit=crop', label: 'Dapur PawonLoka',        caption: 'Di sinilah keajaiban masakan tercipta',   tall: true  },
 ]
 
 function toDisplay(img: GalleryImage, index: number): DisplayImage {

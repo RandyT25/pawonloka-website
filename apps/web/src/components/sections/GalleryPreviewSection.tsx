@@ -17,12 +17,12 @@ type DisplayItem = {
 }
 
 const FALLBACK: DisplayItem[] = [
-  { id: 1, label: 'Ayam Bakar PawonLoka',   category: 'Hidangan Utama', span: 'col-span-2 row-span-2', src: 'https://source.unsplash.com/800x600/?grilled+chicken+satay&sig=1' },
-  { id: 2, label: 'Suasana Warung',          category: 'Restoran',       span: 'col-span-1 row-span-1', src: 'https://source.unsplash.com/400x300/?restaurant+cozy+warm&sig=2' },
-  { id: 3, label: 'Thai Tea & Lychee Tea',   category: 'Minuman',        span: 'col-span-1 row-span-1', src: 'https://source.unsplash.com/400x300/?thai+tea+milk+tea&sig=3' },
-  { id: 4, label: 'Nasi Goreng Kambing',     category: 'Nasi & Mie',     span: 'col-span-1 row-span-1', src: 'https://source.unsplash.com/400x300/?fried+rice+asian&sig=4' },
-  { id: 5, label: 'Momen Bersama',           category: 'Pelanggan',      span: 'col-span-1 row-span-1', src: 'https://source.unsplash.com/400x300/?family+restaurant+dinner&sig=5' },
-  { id: 6, label: 'Roti Bakar Coklat Keju', category: 'Dessert',         span: 'col-span-1 row-span-1', src: 'https://source.unsplash.com/400x300/?toast+chocolate+dessert&sig=6' },
+  { id: 1, label: 'Ayam Bakar PawonLoka',   category: 'Hidangan Utama', span: 'col-span-2 row-span-2', src: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800&h=600&fit=crop' },
+  { id: 2, label: 'Suasana Warung',          category: 'Restoran',       span: 'col-span-1 row-span-1', src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop' },
+  { id: 3, label: 'Thai Tea & Lychee Tea',   category: 'Minuman',        span: 'col-span-1 row-span-1', src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop' },
+  { id: 4, label: 'Nasi Goreng Kambing',     category: 'Nasi & Mie',     span: 'col-span-1 row-span-1', src: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&h=300&fit=crop' },
+  { id: 5, label: 'Momen Bersama',           category: 'Pelanggan',      span: 'col-span-1 row-span-1', src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop' },
+  { id: 6, label: 'Roti Bakar Coklat Keju', category: 'Dessert',         span: 'col-span-1 row-span-1', src: 'https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=400&h=300&fit=crop' },
 ]
 
 const SPANS = ['col-span-2 row-span-2', 'col-span-1 row-span-1', 'col-span-1 row-span-1', 'col-span-1 row-span-1', 'col-span-1 row-span-1', 'col-span-1 row-span-1']
