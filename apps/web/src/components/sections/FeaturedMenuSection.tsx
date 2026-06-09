@@ -9,12 +9,12 @@ import { createClient } from '@/lib/supabase/client'
 import type { MenuItem } from '@/types'
 
 const FALLBACK_ITEMS: MenuItem[] = [
-  { id: 1, category_id: 1, name: 'Ayam Bakar + Nasi', description: 'Ayam bakar bumbu rempah pilihan, disajikan dengan nasi putih hangat dan lalapan segar.', price: 28000, image_url: 'https://source.unsplash.com/600x400/?grilled+chicken+food&sig=11', is_available: true, is_featured: true, is_bestseller: true, is_recommended: false, badge_label: 'Best Seller', display_order: 1, created_at: '', updated_at: '', category: { id: 1, name: 'Hidangan Utama', slug: 'hidangan-utama', description: null, icon: null, display_order: 1, is_active: true, created_at: '' } },
-  { id: 2, category_id: 1, name: 'Ayam Kremes + Nasi', description: 'Ayam goreng dengan balutan kremes renyah gurih, disajikan dengan nasi dan sambal.', price: 30000, image_url: 'https://source.unsplash.com/600x400/?fried+chicken+crispy&sig=12', is_available: true, is_featured: true, is_bestseller: true, is_recommended: false, badge_label: 'Favorit', display_order: 9, created_at: '', updated_at: '', category: { id: 1, name: 'Hidangan Utama', slug: 'hidangan-utama', description: null, icon: null, display_order: 1, is_active: true, created_at: '' } },
-  { id: 3, category_id: 2, name: 'Nasi Goreng Ayam Kremes', description: 'Nasi goreng spesial dengan topping ayam kremes renyah dan sambal pilihan.', price: 38000, image_url: 'https://source.unsplash.com/600x400/?fried+rice+asian+food&sig=13', is_available: true, is_featured: true, is_bestseller: true, is_recommended: false, badge_label: 'Best Seller', display_order: 2, created_at: '', updated_at: '', category: { id: 2, name: 'Nasi & Mie', slug: 'nasi-mie', description: null, icon: null, display_order: 2, is_active: true, created_at: '' } },
-  { id: 4, category_id: 2, name: 'Mie Nyemek Ayam', description: 'Mie nyemek semi-kuah khas Jogja dengan ayam, bumbu pedas manis yang menggugah selera.', price: 28000, image_url: 'https://source.unsplash.com/600x400/?noodles+soup+asian&sig=14', is_available: true, is_featured: false, is_bestseller: false, is_recommended: true, badge_label: null, display_order: 6, created_at: '', updated_at: '', category: { id: 2, name: 'Nasi & Mie', slug: 'nasi-mie', description: null, icon: null, display_order: 2, is_active: true, created_at: '' } },
-  { id: 5, category_id: 7, name: 'Thai Tea', description: 'Thai tea creamy khas Thailand dengan susu kental, disajikan dingin.', price: 22000, image_url: 'https://source.unsplash.com/600x400/?thai+tea+milk+tea&sig=15', is_available: true, is_featured: true, is_bestseller: true, is_recommended: false, badge_label: 'Favorit', display_order: 5, created_at: '', updated_at: '', category: { id: 7, name: 'Minuman', slug: 'minuman', description: null, icon: null, display_order: 7, is_active: true, created_at: '' } },
-  { id: 6, category_id: 5, name: 'Chicken Steak BBQ', description: 'Chicken steak dengan saus BBQ smoky, pilihan nasi putih atau kentang goreng.', price: 38000, image_url: 'https://source.unsplash.com/600x400/?chicken+steak+bbq&sig=16', is_available: true, is_featured: false, is_bestseller: false, is_recommended: true, badge_label: 'Hits', display_order: 2, created_at: '', updated_at: '', category: { id: 5, name: 'Gen-Z Special', slug: 'genz-special', description: null, icon: null, display_order: 5, is_active: true, created_at: '' } },
+  { id: 1, category_id: 1, name: 'Ayam Bakar + Nasi', description: 'Ayam bakar bumbu rempah pilihan, disajikan dengan nasi putih hangat dan lalapan segar.', price: 28000, image_url: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600&h=400&fit=crop', is_available: true, is_featured: true, is_bestseller: true, is_recommended: false, badge_label: 'Best Seller', display_order: 1, created_at: '', updated_at: '', category: { id: 1, name: 'Hidangan Utama', slug: 'hidangan-utama', description: null, icon: null, display_order: 1, is_active: true, created_at: '' } },
+  { id: 2, category_id: 1, name: 'Ayam Kremes + Nasi', description: 'Ayam goreng dengan balutan kremes renyah gurih, disajikan dengan nasi dan sambal.', price: 30000, image_url: 'https://images.unsplash.com/photo-1562967914-608f82629710?w=600&h=400&fit=crop', is_available: true, is_featured: true, is_bestseller: true, is_recommended: false, badge_label: 'Favorit', display_order: 9, created_at: '', updated_at: '', category: { id: 1, name: 'Hidangan Utama', slug: 'hidangan-utama', description: null, icon: null, display_order: 1, is_active: true, created_at: '' } },
+  { id: 3, category_id: 2, name: 'Nasi Goreng Ayam Kremes', description: 'Nasi goreng spesial dengan topping ayam kremes renyah dan sambal pilihan.', price: 38000, image_url: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=400&fit=crop', is_available: true, is_featured: true, is_bestseller: true, is_recommended: false, badge_label: 'Best Seller', display_order: 2, created_at: '', updated_at: '', category: { id: 2, name: 'Nasi & Mie', slug: 'nasi-mie', description: null, icon: null, display_order: 2, is_active: true, created_at: '' } },
+  { id: 4, category_id: 2, name: 'Mie Nyemek Ayam', description: 'Mie nyemek semi-kuah khas Jogja dengan ayam, bumbu pedas manis yang menggugah selera.', price: 28000, image_url: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&h=400&fit=crop', is_available: true, is_featured: false, is_bestseller: false, is_recommended: true, badge_label: null, display_order: 6, created_at: '', updated_at: '', category: { id: 2, name: 'Nasi & Mie', slug: 'nasi-mie', description: null, icon: null, display_order: 2, is_active: true, created_at: '' } },
+  { id: 5, category_id: 7, name: 'Thai Tea', description: 'Thai tea creamy khas Thailand dengan susu kental, disajikan dingin.', price: 22000, image_url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop', is_available: true, is_featured: true, is_bestseller: true, is_recommended: false, badge_label: 'Favorit', display_order: 5, created_at: '', updated_at: '', category: { id: 7, name: 'Minuman', slug: 'minuman', description: null, icon: null, display_order: 7, is_active: true, created_at: '' } },
+  { id: 6, category_id: 5, name: 'Chicken Steak BBQ', description: 'Chicken steak dengan saus BBQ smoky, pilihan nasi putih atau kentang goreng.', price: 38000, image_url: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=400&fit=crop', is_available: true, is_featured: false, is_bestseller: false, is_recommended: true, badge_label: 'Hits', display_order: 2, created_at: '', updated_at: '', category: { id: 5, name: 'Gen-Z Special', slug: 'genz-special', description: null, icon: null, display_order: 5, is_active: true, created_at: '' } },
 ]
 
 export function FeaturedMenuSection() {
@@ -23,14 +23,25 @@ export function FeaturedMenuSection() {
 
   useEffect(() => {
     const load = async () => {
-      const { data } = await supabase
+      // Try featured items first
+      const { data: featured } = await supabase
+        .from('menu_items')
+        .select('*, category:menu_categories(*)')
+        .eq('is_featured', true)
+        .order('display_order')
+        .limit(6)
+      if (featured && featured.length > 0) {
+        setItems(featured as MenuItem[])
+        return
+      }
+      // Fallback: any available items
+      const { data: any6 } = await supabase
         .from('menu_items')
         .select('*, category:menu_categories(*)')
         .eq('is_available', true)
-        .eq('is_featured', true)
-        .order('updated_at', { ascending: false })
+        .order('display_order')
         .limit(6)
-      if (data && data.length > 0) setItems(data as MenuItem[])
+      if (any6 && any6.length > 0) setItems(any6 as MenuItem[])
     }
     load()
   }, [supabase])
